@@ -7,10 +7,20 @@
 ## > Informações: https://blog.brasil.io/2020/03/23/dados-coronavirus-por-municipio-mais-atualizados/
 ## >              https://github.com/turicas/covid19-br/blob/master/api.md
 
+setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 getwd()
+
+if (!dir.exists("~/csv")){ #IF DIRECTORY NOT EXISTS CREATE
+  dir.create("~/csv")
+}
+
+if (!dir.exists("~/png")){ #IF DIRECTORY NOT EXISTS CREATE
+  dir.create("~/png")
+}
+
 ##"Dados de casos"
-download.file("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv", destfile = "global_mobility.csv", mode="wb")
-g_mobility<-read.csv("~/global_mobility.csv", stringsAsFactors = FALSE)
+download.file("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv", destfile = "~/csv/global_mobility.csv", mode="wb")
+g_mobility<-read.csv("~/csv/global_mobility.csv", stringsAsFactors = FALSE)
 colnames(g_mobility)<-c("country_region_code","country_region","sub_region_1","sub_region_2","iso_3166_2_code","census_fips_code","date",
                         "recreation","grocery","parks","transit","workplaces","residential")
 
@@ -243,6 +253,9 @@ pais_aux$date<-as.Date(pais_aux$date)
 library(ggplot2)
 library(RColorBrewer)
 
+if (!dir.exists("../brazil/png")){ #IF DIRECTORY NOT EXISTS CREATE
+  dir.create("../brazil/png")
+}
 
 rdbu_col <- colorRampPalette(brewer.pal(24,'RdBu')) #max até 31
 burdc <- rdbu_col(24) #reverse color scale
