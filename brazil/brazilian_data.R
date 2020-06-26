@@ -4,10 +4,15 @@
 ## > Informações: https://blog.brasil.io/2020/03/23/dados-coronavirus-por-municipio-mais-atualizados/
 ## >              https://github.com/turicas/covid19-br/blob/master/api.md
 
+setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 getwd()
+
+if (!dir.exists("~/csv")){ #IF DIRECTORY NOT EXISTS CREATE
+  dir.create("~/csv")
+}
 ##"Dados de casos"
-download.file("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", destfile = "casos_br.csv.gz", mode="wb")
-casos_br<-read.csv(gzfile("~/casos_br.csv.gz"))
+download.file("https://data.brasil.io/dataset/covid19/caso_full.csv.gz", destfile = "~/csv/casos_br.csv.gz", mode="wb")
+casos_br<-read.csv(gzfile("~/csv/casos_br.csv.gz"))
 
 #Substitute the Portuguese characters ==> UTF-8 encoding
 casos_br$city<-as.character(casos_br$city)
@@ -47,8 +52,8 @@ sink()
 ################################################################################################################
 #Writting the data for the plot map 
 ################################################################################################################
-download.file("https://raw.githubusercontent.com/wcota/covid19br/master/gps_cities.csv", destfile = "gps_cities.csv", mode="wb")
-gps_cities<-read.csv("~/gps_cities.csv")
+download.file("https://raw.githubusercontent.com/wcota/covid19br/master/gps_cities.csv", destfile = "~/csv/gps_cities.csv", mode="wb")
+gps_cities<-read.csv("~/csv/gps_cities.csv")
 gps_cities<-gps_cities[,1:4]
 colnames(gps_cities)<-c("ibge_code","city","lat","lon")
 Encoding(gps_cities$city)<-"UTF-8"
