@@ -1,14 +1,21 @@
+setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+getwd()
+
+if (!dir.exists("~/csv")){ #IF DIRECTORY NOT EXISTS CREATE
+  dir.create("~/csv")
+}
+
 
 ##"John Hopkins DATA"
 ## Downloding the Global data
-download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", destfile = "jhu_confirmed_global.csv", mode="wb")
-jhu_confirmed_global<-read.csv("~/jhu_confirmed_global.csv")
+download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", destfile = "~/csv/jhu_confirmed_global.csv", mode="wb")
+jhu_confirmed_global<-read.csv("~/csv/jhu_confirmed_global.csv")
 
-download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", destfile = "jhu_deaths_global.csv", mode="wb")
-jhu_deaths_global<-read.csv("~/jhu_deaths_global.csv")
+download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv", destfile = "~/csv/jhu_deaths_global.csv", mode="wb")
+jhu_deaths_global<-read.csv("~/csv/jhu_deaths_global.csv")
 
-download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv", destfile = "jhu_recovered_global.csv", mode="wb")
-jhu_recovered_global<-read.csv("~/jhu_recovered_global.csv")
+download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv", destfile = "~/csv/jhu_recovered_global.csv", mode="wb")
+jhu_recovered_global<-read.csv("~/csv/jhu_recovered_global.csv")
 
 # Getting the cases per day, starting at Fifth position
 findCountryCases<-function(country){
@@ -121,11 +128,11 @@ pe_cases<-Country_data_cases("Peru")
 pe_deaths<-Country_data_deaths("Peru")
 
 #Getting the USA data
-download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv", destfile = "jhu_confirmed_US.csv", mode="wb")
-jhu_confirmed_US<-read.csv("~/jhu_confirmed_US.csv")
+download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv", destfile = "~/csv/jhu_confirmed_US.csv", mode="wb")
+jhu_confirmed_US<-read.csv("~/csv/jhu_confirmed_US.csv")
 
-download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv", destfile = "jhu_deaths_US.csv", mode="wb")
-jhu_deaths_US<-read.csv("~/jhu_deaths_US.csv")
+download.file("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv", destfile = "~/csv/jhu_deaths_US.csv", mode="wb")
+jhu_deaths_US<-read.csv("~/csv/jhu_deaths_US.csv")
 
 USA_cases<-jhu_confirmed_US[,12:length(jhu_confirmed_US)]
 USA_deaths<-jhu_deaths_US[,13:length(jhu_deaths_US)]
